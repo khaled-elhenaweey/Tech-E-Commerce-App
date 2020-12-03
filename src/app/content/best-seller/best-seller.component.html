@@ -1,0 +1,44 @@
+<div class="card my-5 shadow">
+    <div class="card-header py-1 pt-3">
+        <p><span class="head-category">Best Seller</span> </p>
+    </div>
+    <div class="card-body">
+        <owl-carousel-o [options]="customOptions">
+            <ng-template carouselSlide *ngFor="let products of products">
+                <div class="slide">
+                    <div class="container page-wrapper mr-5">
+                        <div class="page-inner">
+                            <div class="row">
+                                <div class="el-wrapper">
+                                    <div class="box-up">
+                                        <img class="img" src="{{ products.img }}" alt="">
+                                        <div class="img-info">
+                                            <div class="info-inner">
+                                                <span class="p-name">{{ products.productName }}</span>
+                                                <a href="#" class="p-company"> Wishlist  <i class="bx bx-heart  bx-xs bx-fw bx-flashing-hover icon-single" ></i></a>
+                                            </div>
+                                            <div class="a-size">Available: <span class="size">{{ products.qty }}</span></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="box-down">
+                                        <div class="h-bg">
+                                            <div class="h-bg-inner"></div>
+                                        </div>
+
+                                        <a class="cart" [routerLink]="['/Home/Product', products.productId]">
+                                            <span class="price">${{ products.productPrice }}</span>
+                                            <span class="add-to-cart">
+                <a class="txt">Quick View  <i class="bx bx-show-alt bx-sm bx-fw bx-tada-hover icon-single" ></i></a>
+                            </span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+        </owl-carousel-o>
+    </div>
+</div>

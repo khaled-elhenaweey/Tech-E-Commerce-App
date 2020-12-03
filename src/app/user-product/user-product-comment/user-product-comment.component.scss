@@ -1,0 +1,117 @@
+@import "../../app.component.scss";
+// comment section start here .
+@mixin clearfix() {
+    &:before,
+    &:after {
+        content: "";
+        display: table;
+    }
+    &:after {
+        clear: both;
+    }
+}
+
+.page-title {
+    color: $color-dark-blue;
+    font-family: Montserrat;
+    text-align: center;
+    font-weight: 600;
+}
+
+.testimonial-wrap {
+    @include clearfix();
+    margin: 10px auto;
+}
+
+.testimonial {
+    font-family: Montserrat;
+    background: $color-grey;
+    border-radius: 3px;
+    border: none;
+    box-shadow: 0 2px 0 0 rgba($color-solid-black, 0.10);
+    position: relative;
+    color: $color-soft-black;
+    padding: 20px;
+    margin-bottom: 30px;
+    &:before,
+    &:after {
+        position: absolute;
+        visibility: visible;
+        width: 0;
+        height: 0;
+        content: "";
+        border-style: solid;
+        border-color: transparent;
+        border-bottom: 0;
+    }
+    &:before {
+        border-width: 17px;
+        border-top-color: rgba($color-solid-black, 0.15);
+        bottom: -17px;
+        left: 14px;
+    }
+    &:after {
+        border-width: 15px;
+        border-top-color: $color-grey;
+        bottom: -15px;
+        left: 16px;
+    }
+    strong {
+        display: block;
+        font-weight: 600;
+        font-size: 16px;
+        margin-bottom: 10px;
+        color: $color-soft-blue;
+    }
+}
+
+.testimonial-author {
+    font-family: Montserrat;
+    display: block;
+    line-height: 1.2;
+    .name {
+        color: lighten($color-grey, 40%);
+    }
+    strong {
+        display: block;
+        font-weight: 600;
+        font-size: 22px;
+        color: $color-soft-blue;
+    }
+    .name,
+    .stars {
+        display: block;
+        float: left;
+    }
+    .stars {
+        display: inline-block;
+        margin-left: 20px;
+        font-size: 25px;
+        line-height: 45px;
+        color: $color-solid-gold;
+    }
+}
+
+p {
+    font-family: Montserrat;
+    color: $color-dark-blue;
+    font-weight: 400;
+}
+
+@media (max-width: 414px) {
+    .page-title {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 320px) {
+    .page-title {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 280px) {
+    .page-title {
+        font-size: 16px;
+    }
+}
