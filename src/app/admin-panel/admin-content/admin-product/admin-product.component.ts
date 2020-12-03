@@ -7,7 +7,7 @@ import { DataTableDirective } from 'angular-datatables';
 import { FormGroup } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { DomSanitizer } from '@angular/platform-browser';
-
+import {  ActivatedRoute, Params, Router} from '@angular/router';
 declare var $: any;
 declare var jQuery: any;
 (function () {
@@ -50,6 +50,8 @@ export class AdminProductComponent implements OnInit, OnDestroy {
   data: Array<Object> = [{ id: 0, name: "name1" }, { id: 1, name: "name2" }];
 
   // tslint:disable-next-line: typedef
+  products: Product[];
+  product: Product;
   productId: number = 1;
   productName: string;
   productPrice: number;
@@ -57,8 +59,7 @@ export class AdminProductComponent implements OnInit, OnDestroy {
   description: string;
   rate: number | null;
   categoryId: number | null;
-  products: Product[];
-  selectedValue :number = 0;
+  selectedValue:number = 0;
   categorySelected: number;
   modifiedValue: number;
   public message: string;
@@ -70,8 +71,12 @@ export class AdminProductComponent implements OnInit, OnDestroy {
 
   @Output() public onUploadFinished = new EventEmitter();
 
-  constructor(private productSerivce: ProductService, private http: HttpClient, private sanitizer: DomSanitizer) {
+  constructor(private productSerivce: ProductService, private http: HttpClient, private sanitizer: DomSanitizer,private route: ActivatedRoute, private router: Router) {
 
+  }
+  public route5(id:number){
+    localStorage.setItem("id",id.toString());
+    this.router.navigate(['/Admin/Product']);
   }
 
   ngOnInit(): void {
@@ -82,9 +87,25 @@ export class AdminProductComponent implements OnInit, OnDestroy {
       autoWidth: true,
 
     };
+    this.route.params.subscribe(
+      (params: Params) => {
+         this.productId = params['id'];
+      }
+    );
+    console.log(this.productId);
+
     let stringProducts=localStorage.getItem("products");
     let products=<Product[]>JSON.parse(stringProducts);
     this.products=products;
+    let editedProduct = products.find(e => e.productId == this.productId);
+    console.log(editedProduct);
+
+    this.productName=editedProduct.productName;
+    this.productPrice=editedProduct.productPrice;
+    this.qty=editedProduct.qty;
+    this.description=editedProduct.description;
+    $("#save").hide();
+    $("#edit").show();
 
     this.dtTrigger.next();
   }

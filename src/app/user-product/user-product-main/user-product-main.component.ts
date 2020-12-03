@@ -24,9 +24,9 @@ export class UserProductMainComponent implements OnInit {
 
     this.router.navigate(['/Home']);
   }
-  public route4(){
-
-    this.router.navigate(['/Admin/Product', this.product.productId]);
+  public route4(id:number){
+    localStorage.setItem("id",id.toString());
+    this.router.navigate(['/Admin/Product']);
   }
   ngOnInit(): void {
     this.route.params.subscribe(
@@ -35,20 +35,12 @@ export class UserProductMainComponent implements OnInit {
       }
    );
 
-    let stringProducts = localStorage.getItem("products");
-    let products = <Product[]> JSON.parse(stringProducts);
+    let stringProducts=localStorage.getItem("products");
+    let products=<Product[]>JSON.parse(stringProducts);
     this.product = products.find(e => e.productId == this.productId);
+    this.products=products;
     console.log(this.product);
   }
-
-  // async getProductbyid(product: Product){
-  //   this.productName = product.productName;
-  //   this.productId = product.productId;
-  //   this.productPrice = product.productPrice;
-  //   this.qty = product.qty;
-  //   this.description = product.description;
-
-  // }
 
   async deleteProduct(id: Number): Promise<void> {
     Swal.fire({
