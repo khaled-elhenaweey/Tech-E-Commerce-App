@@ -29,6 +29,7 @@ export class UserProductMainComponent implements OnInit {
     this.router.navigate(['/Admin/Product']);
   }
   ngOnInit(): void {
+
     this.route.params.subscribe(
       (params: Params) => {
          this.productId = params['id'];

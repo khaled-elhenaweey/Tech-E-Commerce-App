@@ -36,8 +36,7 @@ declare var jQuery: any;
   styleUrls: ['./admin-product.component.scss']
 })
 export class AdminProductComponent implements OnInit, OnDestroy {
-  imageSource;
-  imageUrl: string = "../../../../assets/default-image.jpg";
+
   url = "";
   @ViewChild(DataTableDirective, { static: false })
   dtElement: DataTableDirective;
@@ -80,6 +79,7 @@ export class AdminProductComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+      window.scrollTo(0, 0);
     this.dtOptions = {
       responsive: true,
       pagingType: 'full_numbers',
