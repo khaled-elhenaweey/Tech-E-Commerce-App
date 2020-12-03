@@ -50,7 +50,7 @@ export class AdminProductComponent implements OnInit, OnDestroy {
   data: Array<Object> = [{ id: 0, name: "name1" }, { id: 1, name: "name2" }];
 
   // tslint:disable-next-line: typedef
-  productId: number;
+  productId: number = 1;
   productName: string;
   productPrice: number;
   qty: number;
@@ -94,7 +94,7 @@ export class AdminProductComponent implements OnInit, OnDestroy {
       return;
     }
     console.log(files);
-    this.filesToUpload =files;
+    this.filesToUpload = files;
 
     this.handleFileInput(files);
   }
@@ -137,11 +137,10 @@ export class AdminProductComponent implements OnInit, OnDestroy {
     let stringProducts=localStorage.getItem("products");
     let products=<Product[]>JSON.parse(stringProducts);
     let productName = this.productName;
-    let productId = 1;
     let productPrice = this.productPrice;
     let qty = this.qty;
     let description = this.description;
-    let newProduct = new Product(productId, productName, productPrice, qty, description);
+    let newProduct = new Product(this.productId, productName, productPrice, qty, description);
     newProduct.img = this.url;
     products.push(newProduct);
     localStorage.setItem("products",JSON.stringify(products));
@@ -162,6 +161,7 @@ export class AdminProductComponent implements OnInit, OnDestroy {
     this.productPrice = product.productPrice;
     this.qty = product.qty;
     this.description = product.description;
+
     $("#save").hide();
     $("#edit").show();
   }
@@ -198,12 +198,12 @@ export class AdminProductComponent implements OnInit, OnDestroy {
         confirmButtonText: 'Yes, delete it!'
       }).then(async (result) => {
         if (result.isConfirmed) {
-          // await this.productSerivce.deleteProduct(id);
           let stringProducts=localStorage.getItem("products");
           let products=<Product[]>JSON.parse(stringProducts);
           products = products.filter(item => item.productId != id);
           this.products = products;
           localStorage.setItem("products",JSON.stringify(products));
+
 
           Swal.fire(
             'Deleted!',
@@ -215,7 +215,6 @@ export class AdminProductComponent implements OnInit, OnDestroy {
   }
   resetControls(): void {
     this.productName = "";
-    this.productId = 0;
     this.productPrice = null;
     this.qty = null ;
     this.description = "";

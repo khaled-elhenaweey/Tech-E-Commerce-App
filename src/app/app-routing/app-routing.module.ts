@@ -40,7 +40,7 @@ const routes: Routes = [
         component: AdminProductComponent,
       },
       {
-          path: 'Product',
+          path: 'Product/:id',
           component: AdminProductComponent,
       }
   ]
